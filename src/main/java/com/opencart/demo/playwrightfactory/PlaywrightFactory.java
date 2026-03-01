@@ -20,20 +20,20 @@ public class PlaywrightFactory {
   static ThreadLocal<Page> tlPage = new ThreadLocal<>();
   Properties properties;
 
-  public ThreadLocal<Browser> getTlBrowser() {
-    return tlBrowser;
+  public Playwright getPlaywright() {
+    return tlPlaywright.get();
   }
 
-  public ThreadLocal<BrowserContext> getTlBrowserContext() {
-    return tlBrowserContext;
+  public Browser getBrowser() {
+    return tlBrowser.get();
   }
 
-  public ThreadLocal<Playwright> getTlPlaywright() {
-    return tlPlaywright;
+  public BrowserContext getBrowserContext() {
+    return tlBrowserContext.get();
   }
 
-  public ThreadLocal<Page> getTlPage() {
-    return tlPage;
+  public Page getPage() {
+    return tlPage.get();
   }
 
   public Properties initProp() {
@@ -47,32 +47,33 @@ public class PlaywrightFactory {
   }
 
   public Page initPlaywright(Properties properties) {
-    //Playwright playwright = Playwright.create();
+
     Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
     int width = (int) dimension.getWidth();
     int height = (int) dimension.getHeight();
     LaunchOptions launchOptions = new LaunchOptions();
     launchOptions.setHeadless(false);
+    //Playwright playwright = Playwright.create();
     tlPlaywright.set(Playwright.create());
-    Browser browser = null;
+    // Browser browser = null;
     String browserName = properties.getProperty("browser").trim();
     switch (browserName.toLowerCase().trim()) {
       case "chromium":
       case "chrome":
       case "msedge":
         //browser = playwright.chromium().launch(launchOptions.setChannel(browserName));
-        getTlBrowser().set(tlPlaywright.get().chromium()
+        tlBrowser.set(getPlaywright().chromium()
             .launch(launchOptions.setChannel(browserName)));
         break;
       case "firefox":
         // browser = playwright.firefox().launch(launchOptions.setChannel(browserName));
-        getTlBrowser().set(tlPlaywright.get().firefox()
+        tlBrowser.set(getPlaywright().firefox()
             .launch(launchOptions.setChannel(browserName)));
         break;
       case "safari":
       case "webkit":
         /// browser = playwright.webkit().launch(launchOptions.setChannel(browserName));
-        getTlBrowser().set(tlPlaywright.get().webkit()
+        tlBrowser.set(getPlaywright().webkit()
             .launch(launchOptions.setChannel(browserName)));
         break;
       default:
@@ -80,12 +81,12 @@ public class PlaywrightFactory {
     }
     // BrowserContext browserContext = browser.newContext();
     tlBrowserContext.set(
-        tlBrowser.get().newContext(new NewContextOptions().setViewportSize(width, height)));
+        getBrowser().newContext(new NewContextOptions().setViewportSize(width, height)));
     //Page page = browserContext.newPage();
-    tlPage.set(tlBrowserContext.get().newPage());
+    tlPage.set(getBrowserContext().newPage());
     // page.navigate("https://demo.opencart.com/");
     tlPage.get().navigate(properties.getProperty("url").trim());
-    return tlPage.get();
+    return getPage();
   }
 
 }
