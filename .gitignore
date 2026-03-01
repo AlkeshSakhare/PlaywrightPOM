@@ -1,4 +1,14 @@
-/.idea/
+# Maven
 /target/
+
+# IntelliJ / Eclipse
+.classpath
+.project
+.settings/
+
+# TestNG reports
 /test-output/
-/.settings/
+
+# IDE files
+.idea/
+*.iml
