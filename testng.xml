@@ -3,6 +3,7 @@
   <test name="Test">
     <classes>
       <class name="com.opencart.demo.testcases.HomePageTest"/>
+      <class name="com.opencart.demo.testcases.LoginPageTest"/>
     </classes>
   </test>
 </suite>
