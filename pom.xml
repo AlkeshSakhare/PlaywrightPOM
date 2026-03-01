@@ -52,7 +52,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
-  <url>http://www.example.com</url>
+  <url>https://demo.opencart.com</url>
 
   <version>1.0-SNAPSHOT</version>
 

@@ -5,8 +5,8 @@ import com.opencart.demo.pages.HomePage;
 import com.opencart.demo.pages.LoginPage;
 import com.opencart.demo.playwrightfactory.PlaywrightFactory;
 import java.util.Properties;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
 
@@ -15,17 +15,16 @@ public class BaseTest {
   protected Properties properties;
   PlaywrightFactory pf;
   Page page;
-
-  @BeforeTest
+  
+  @BeforeMethod
   public void setUp() {
-    System.out.println("Running from: " + this.getClass().getName());
+    System.out.println("Running from BaseTest: " + this.getClass().getName());
     pf = new PlaywrightFactory();
     properties = pf.initProp();
     page = pf.initPlaywright(properties);
-    homePage = new HomePage(page);
   }
 
-  @AfterTest
+  @AfterMethod
   public void tearDown() {
     page.context().close();
     page.context().browser().close();

@@ -16,7 +16,7 @@ public class PlaywrightFactory {
   public Properties initProp() {
     try {
       properties = new Properties();
-      properties.load(new FileReader("./src/test/resources/config.properties"));
+      properties.load(new FileReader("./src/main/resources/config.properties"));
       return properties;
     } catch (IOException e) {
       throw new RuntimeException(e);

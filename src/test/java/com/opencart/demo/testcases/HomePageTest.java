@@ -1,11 +1,18 @@
 package com.opencart.demo.testcases;
 
 import com.opencart.demo.constants.AppConstants;
+import com.opencart.demo.pages.HomePage;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class HomePageTest extends BaseTest {
+
+  @BeforeMethod
+  public void pageSetUp() {
+    homePage = new HomePage(page);
+  }
 
   @Test
   public void verifyHomePageTitle() {

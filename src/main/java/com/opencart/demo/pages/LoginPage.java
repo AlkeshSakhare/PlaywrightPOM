@@ -20,6 +20,7 @@ public class LoginPage {
     page.fill(emailIdTxt, email);
     page.fill(passwordTxt, pwd);
     page.click(loginBtn);
+    page.waitForTimeout(4000);
     return page.isVisible(logoutLink);
   }
 
