@@ -14,19 +14,19 @@ public class LoginPageTest extends BaseTest {
     loginPage = homePage.gotoLoginPage();
   }
 
-  @Test(priority = 1)
+  @Test
   public void verifyLoginPage() {
     String actualTitle = loginPage.getLoginPageTitle();
     Assert.assertEquals(actualTitle, AppConstants.LOGIN_PAGE_TITLE);
   }
 
-  @Test(priority = 2)
+  @Test
   public void verifyForgottenPasswordLink() {
     Assert.assertTrue(loginPage.isforgottenPasswordLinkDisplayed(),
         "Forgotten Password Link is missing");
   }
 
-  @Test(priority = 3)
+  @Test
   public void verifyLogin() {
     boolean isLogoutPresent = loginPage.doLogin(properties.getProperty("email").trim(),
         properties.getProperty("password").trim());
